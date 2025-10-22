@@ -51,3 +51,11 @@ footer {
 	display: flex;
 	gap: 1rem;
 }
+
+.loetelu {
+	list-style-type: decimal-leading-zero;
+}
+
+.loetelu-element {
+	padding: 0.25rem;
+}
