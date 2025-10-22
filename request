@@ -1,0 +1,145 @@
+curl
+							'https://api.peatus.ee/routing/v1/routers/estonia/index/graphql' \
+							--compressed \ -X POST \ -H 'User-Agent: Mozilla/5.0 (X11; Linux
+							x86_64; rv:142.0) Gecko/20100101 Firefox/142.0' \ -H 'Accept: */*'
+							\ -H 'Accept-Language: et' \ -H 'Accept-Encoding: gzip, deflate,
+							br, zstd' \ -H 'Referer: https://web.peatus.ee/' \ -H 'OTPTimeout:
+							12000' \ -H 'Content-Type: application/json' \ -H 'Origin:
+							https://web.peatus.ee' \ -H 'Sec-GPC: 1' \ -H 'Connection:
+							keep-alive' \ -H 'Sec-Fetch-Dest: empty' \ -H 'Sec-Fetch-Mode:
+							cors' \ -H 'Sec-Fetch-Site: same-site' \ -H 'Priority: u=0' \ -H
+							'TE: trailers' \ --data-raw
+							$'{"id":"queryUtils_SummaryPage_Query","query":"query
+							queryUtils_SummaryPage_Query(\\n $fromPlace: String\041\\n
+							$toPlace: String\041\\n $numItineraries: Int\041\\n $modes:
+							[TransportMode\041]\\n $date: String\041\\n $time: String\041\\n
+							$walkReluctance: Float\\n $maxWalkDistance: Float\\n
+							$walkBoardCost: Int\\n $minTransferTime: Int\\n $walkSpeed:
+							Float\\n $wheelchair: Boolean\\n $ticketTypes: [String]\\n
+							$arriveBy: Boolean\\n $transferPenalty: Int\\n $bikeSpeed:
+							Float\\n $optimize: OptimizeType\\n $unpreferred:
+							InputUnpreferred\\n $modeWeight: InputModeWeight\\n) {\\n viewer
+							{\\n ...SummaryPage_viewer_45zFLL\\n }\\n serviceTimeRange {\\n
+							...SummaryPage_serviceTimeRange\\n }\\n}\\n\\nfragment
+							ItineraryLine_legs on Leg {\\n mode\\n rentedBike\\n startTime\\n
+							endTime\\n distance\\n legGeometry {\\n points\\n }\\n
+							transitLeg\\n interlineWithPreviousLeg\\n route {\\n shortName\\n
+							color\\n type\\n agency {\\n name\\n id\\n }\\n id\\n }\\n from
+							{\\n lat\\n lon\\n name\\n vertexType\\n bikeRentalStation {\\n
+							stationId\\n name\\n lat\\n lon\\n bikesAvailable\\n
+							spacesAvailable\\n state\\n networks\\n id\\n }\\n stop {\\n
+							gtfsId\\n code\\n platformCode\\n id\\n }\\n }\\n to {\\n lat\\n
+							lon\\n name\\n vertexType\\n bikeRentalStation {\\n stationId\\n
+							name\\n lat\\n lon\\n bikesAvailable\\n spacesAvailable\\n
+							state\\n networks\\n id\\n }\\n stop {\\n gtfsId\\n code\\n
+							platformCode\\n id\\n }\\n }\\n trip {\\n stoptimes {\\n stop {\\n
+							gtfsId\\n id\\n }\\n pickupType\\n }\\n id\\n }\\n
+							intermediatePlaces {\\n arrivalTime\\n stop {\\n gtfsId\\n lat\\n
+							lon\\n name\\n code\\n platformCode\\n id\\n }\\n
+							}\\n}\\n\\nfragment ItinerarySummaryListContainer_itineraries on
+							Itinerary {\\n walkDistance\\n startTime\\n endTime\\n legs {\\n
+							realTime\\n realtimeState\\n transitLeg\\n startTime\\n endTime\\n
+							mode\\n distance\\n duration\\n rentedBike\\n
+							interlineWithPreviousLeg\\n intermediatePlace\\n
+							intermediatePlaces {\\n stop {\\n zoneId\\n id\\n }\\n }\\n route
+							{\\n mode\\n shortName\\n type\\n color\\n agency {\\n name\\n
+							id\\n }\\n alerts {\\n alertSeverityLevel\\n effectiveEndDate\\n
+							effectiveStartDate\\n id\\n }\\n id\\n }\\n trip {\\n pattern {\\n
+							code\\n id\\n }\\n stoptimes {\\n realtimeState\\n stop {\\n
+							gtfsId\\n id\\n }\\n pickupType\\n }\\n id\\n }\\n from {\\n
+							name\\n lat\\n lon\\n stop {\\n gtfsId\\n zoneId\\n
+							platformCode\\n alerts {\\n alertSeverityLevel\\n
+							effectiveEndDate\\n effectiveStartDate\\n id\\n }\\n id\\n }\\n
+							bikeRentalStation {\\n bikesAvailable\\n networks\\n id\\n }\\n
+							}\\n to {\\n stop {\\n gtfsId\\n zoneId\\n alerts {\\n
+							alertSeverityLevel\\n effectiveEndDate\\n effectiveStartDate\\n
+							id\\n }\\n id\\n }\\n bikePark {\\n bikeParkId\\n name\\n id\\n
+							}\\n carPark {\\n carParkId\\n name\\n id\\n }\\n }\\n
+							}\\n}\\n\\nfragment ItineraryTab_itinerary on Itinerary {\\n
+							walkDistance\\n duration\\n startTime\\n endTime\\n fares {\\n
+							cents\\n components {\\n cents\\n fareId\\n routes {\\n agency
+							{\\n gtfsId\\n fareUrl\\n name\\n id\\n }\\n gtfsId\\n id\\n }\\n
+							}\\n type\\n }\\n legs {\\n mode\\n ...LegAgencyInfo_leg\\n from
+							{\\n lat\\n lon\\n name\\n vertexType\\n bikePark {\\n
+							bikeParkId\\n name\\n id\\n }\\n bikeRentalStation {\\n
+							networks\\n bikesAvailable\\n lat\\n lon\\n stationId\\n id\\n
+							}\\n stop {\\n gtfsId\\n code\\n platformCode\\n vehicleMode\\n
+							zoneId\\n alerts {\\n alertSeverityLevel\\n effectiveEndDate\\n
+							effectiveStartDate\\n alertHeaderText\\n alertDescriptionText\\n
+							id\\n }\\n id\\n }\\n }\\n to {\\n lat\\n lon\\n name\\n
+							vertexType\\n bikeRentalStation {\\n lat\\n lon\\n stationId\\n
+							networks\\n bikesAvailable\\n id\\n }\\n stop {\\n gtfsId\\n
+							code\\n platformCode\\n zoneId\\n name\\n vehicleMode\\n alerts
+							{\\n alertSeverityLevel\\n effectiveEndDate\\n
+							effectiveStartDate\\n alertHeaderText\\n alertDescriptionText\\n
+							id\\n }\\n id\\n }\\n bikePark {\\n bikeParkId\\n name\\n id\\n
+							}\\n carPark {\\n carParkId\\n name\\n id\\n }\\n }\\n legGeometry
+							{\\n length\\n points\\n }\\n intermediatePlaces {\\n
+							arrivalTime\\n stop {\\n gtfsId\\n lat\\n lon\\n name\\n code\\n
+							platformCode\\n zoneId\\n id\\n }\\n }\\n realTime\\n
+							realtimeState\\n transitLeg\\n rentedBike\\n startTime\\n
+							endTime\\n interlineWithPreviousLeg\\n distance\\n duration\\n
+							intermediatePlace\\n route {\\n shortName\\n color\\n gtfsId\\n
+							type\\n longName\\n desc\\n agency {\\n gtfsId\\n fareUrl\\n
+							name\\n phone\\n id\\n }\\n alerts {\\n alertSeverityLevel\\n
+							effectiveEndDate\\n effectiveStartDate\\n alertHeaderText\\n
+							alertDescriptionText\\n id\\n }\\n id\\n }\\n trip {\\n gtfsId\\n
+							tripHeadsign\\n pattern {\\n code\\n id\\n }\\n stoptimesForDate
+							{\\n headsign\\n pickupType\\n realtimeState\\n stop {\\n
+							gtfsId\\n id\\n }\\n }\\n id\\n }\\n }\\n}\\n\\nfragment
+							ItineraryTab_plan on Plan {\\n date\\n}\\n\\nfragment
+							LegAgencyInfo_leg on Leg {\\n agency {\\n name\\n url\\n
+							fareUrl\\n id\\n }\\n}\\n\\nfragment RouteLine_pattern on Pattern
+							{\\n code\\n geometry {\\n lat\\n lon\\n }\\n route {\\n mode\\n
+							type\\n color\\n id\\n }\\n stops {\\n lat\\n lon\\n name\\n
+							gtfsId\\n platformCode\\n code\\n
+							...StopCardHeaderContainer_stop\\n id\\n }\\n}\\n\\nfragment
+							StopCardHeaderContainer_stop on Stop {\\n gtfsId\\n name\\n
+							code\\n desc\\n zoneId\\n alerts {\\n alertSeverityLevel\\n
+							effectiveEndDate\\n effectiveStartDate\\n id\\n }\\n lat\\n lon\\n
+							stops {\\n name\\n desc\\n id\\n }\\n}\\n\\nfragment
+							SummaryPage_serviceTimeRange on serviceTimeRange {\\n start\\n
+							end\\n}\\n\\nfragment SummaryPage_viewer_45zFLL on QueryType {\\n
+							plan(fromPlace: $fromPlace, toPlace: $toPlace, numItineraries:
+							$numItineraries, transportModes: $modes, date: $date, time: $time,
+							walkReluctance: $walkReluctance, maxWalkDistance:
+							$maxWalkDistance, walkBoardCost: $walkBoardCost, minTransferTime:
+							$minTransferTime, walkSpeed: $walkSpeed, wheelchair: $wheelchair,
+							allowedTicketTypes: $ticketTypes, arriveBy: $arriveBy,
+							transferPenalty: $transferPenalty, bikeSpeed: $bikeSpeed,
+							optimize: $optimize, unpreferred: $unpreferred, modeWeight:
+							$modeWeight) {\\n ...SummaryPlanContainer_plan\\n
+							...ItineraryTab_plan\\n itineraries {\\n startTime\\n endTime\\n
+							...ItineraryTab_itinerary\\n
+							...SummaryPlanContainer_itineraries\\n legs {\\n mode\\n
+							...ItineraryLine_legs\\n transitLeg\\n legGeometry {\\n points\\n
+							}\\n route {\\n gtfsId\\n type\\n shortName\\n id\\n }\\n trip
+							{\\n gtfsId\\n directionId\\n stoptimesForDate {\\n
+							scheduledDeparture\\n pickupType\\n }\\n pattern {\\n
+							...RouteLine_pattern\\n id\\n }\\n id\\n }\\n from {\\n name\\n
+							lat\\n lon\\n stop {\\n gtfsId\\n zoneId\\n id\\n }\\n
+							bikeRentalStation {\\n stationId\\n bikesAvailable\\n networks\\n
+							id\\n }\\n }\\n to {\\n stop {\\n gtfsId\\n zoneId\\n id\\n }\\n
+							bikePark {\\n bikeParkId\\n name\\n id\\n }\\n }\\n }\\n }\\n
+							}\\n}\\n\\nfragment SummaryPlanContainer_itineraries on Itinerary
+							{\\n ...ItinerarySummaryListContainer_itineraries\\n endTime\\n
+							startTime\\n legs {\\n mode\\n to {\\n bikePark {\\n bikeParkId\\n
+							name\\n id\\n }\\n }\\n ...ItineraryLine_legs\\n transitLeg\\n
+							legGeometry {\\n points\\n }\\n route {\\n gtfsId\\n id\\n }\\n
+							trip {\\n gtfsId\\n directionId\\n stoptimesForDate {\\n
+							scheduledDeparture\\n }\\n pattern {\\n ...RouteLine_pattern\\n
+							id\\n }\\n id\\n }\\n }\\n}\\n\\nfragment
+							SummaryPlanContainer_plan on Plan {\\n date\\n itineraries {\\n
+							startTime\\n endTime\\n legs {\\n mode\\n ...ItineraryLine_legs\\n
+							transitLeg\\n legGeometry {\\n points\\n }\\n route {\\n gtfsId\\n
+							id\\n }\\n trip {\\n gtfsId\\n directionId\\n stoptimesForDate
+							{\\n scheduledDeparture\\n pickupType\\n }\\n pattern {\\n
+							...RouteLine_pattern\\n id\\n }\\n id\\n }\\n from {\\n name\\n
+							lat\\n lon\\n stop {\\n gtfsId\\n zoneId\\n id\\n }\\n
+							bikeRentalStation {\\n bikesAvailable\\n networks\\n id\\n }\\n
+							}\\n to {\\n stop {\\n gtfsId\\n zoneId\\n id\\n }\\n bikePark
+							{\\n bikeParkId\\n name\\n id\\n }\\n }\\n }\\n
+							}\\n}\\n","variables":{"fromPlace":"Tartu \xdclikooli Delta
+							\xf5ppehoone, Tartu linn, Tartu linn, Tartu
+							maakond::58.38507,26.725327","toPlace":"Melluka, P\xe4rnumaa, Tori
+							vald::58.423752,24.45373","numItineraries":5,"modes":[{"mode":"BUS"},{"mode":"FERRY"},{"mode":"RAIL"},{"mode":"SUBWAY"},{"mode":"TRAM"},{"mode":"WALK"}],"date":"2025-10-22","time":"14:48:23","walkReluctance":1.8,"maxWalkDistance":10000,"walkBoardCost":120,"minTransferTime":90,"walkSpeed":1.2,"wheelchair":false,"ticketTypes":null,"arriveBy":false,"transferPenalty":0,"bikeSpeed":5.55,"optimize":"GREENWAYS","unpreferred":null,"modeWeight":null}}'

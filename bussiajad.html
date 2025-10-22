@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ee">
+	<head>
+		<meta charset="UTF-8" />
+
+		<!-- see rida ütleb, kuidas veebileht
+    peaks välja nägema erinevate ekraani suurustega -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- see rida ütleb Internet Explorer brauserile, et too kasutaks kõige uuemat
+    renderdamismootorit (edge) -->
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+		<title>Bussiajad</title>
+		<link rel="stylesheet" href="styles.css" />
+		<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	</head>
+	<body>
+		<header class="päis">
+			<nav class="navigatsioon">
+				<div class="logo">
+					<p>Logo tuleks siia</p>
+				</div>
+				<ul class="nav-lingid">
+					<li><a class="nav-link" href="index.html">Kodu</a></li>
+					<li><a class="nav-link" href="bussiajad.html">Bussiajad</a></li>
+					<li><a class="nav-link" href="#">Mingi kolmas asi</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main class="üldine">
+			<section class="bussiajad">
+				<div class="bussiajad-sisu">
+					<h2>Bussiajad:</h2>
+					<hr />
+					<div class="bussiajad-saar">
+						<div>
+							<img src="buss.jpg" alt="Pilt Tartu bussist" width="500" />
+							<p style="font-size: 10px">
+								Pilt võetud lehelt https://www.tartu.ee/et/tartu-bussipidu
+							</p>
+						</div>
+						<p>Siia tuleb API-lt andmed kenas formaadis.</p>
+						<hr />
+						<div style="flex: 1">
+							<p>Näidis API requestist:</p>
+							<a href="request">Siin</a>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer>
+			<p>
+				&copy; 2025 Sissejuhatus erialasse projekt. Kõik õigused kaitsmata; tee,
+				mis tahad.
+			</p>
+		</footer>
+	</body>
+</html>

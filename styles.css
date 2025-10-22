@@ -1,0 +1,61 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+
+.päis {
+	background-color: antiquewhite;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+.navigatsioon {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.nav-lingid {
+	display: flex;
+	gap: 1.5rem;
+}
+
+.nav-link {
+	text-decoration: underline double;
+	color: maroon;
+}
+
+.üldine {
+	padding-left: 1rem;
+	padding-right: 1rem;
+	flex: 1;
+}
+
+footer {
+	background-color: #f5f5f5;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	text-align: center;
+	margin-top: auto;
+}
+
+.bussiajad-saar {
+	display: flex;
+	gap: 1rem;
+}
+
+.loetelu {
+	list-style-type: decimal-leading-zero;
+}
+
+.loetelu-element {
+	padding: 0.25rem;
+}
