@@ -13,7 +13,9 @@
 
 		<title>Bussiajad</title>
 		<link rel="stylesheet" href="styles.css" />
-		<script src="script.js" />
+
+		<!-- siin peab olema eraldiseisev sulgev tag, muidu HTML ei saa aru, kus lõpp on -->
+		<script src="script.js"></script>
 		<link rel="icon" href="favicon.ico" type="image/x-icon" />
 	</head>
 	<body>
@@ -42,11 +44,9 @@
 								Pilt võetud lehelt https://www.tartu.ee/et/tartu-bussipidu
 							</p>
 						</div>
-						<p>Siia tuleb API-lt andmed kenas formaadis.</p>
 						<hr />
 						<div style="flex: 1">
-							<p>Näidis API requestist:</p>
-							<a href="request">Siin</a>
+							<ul id="bussiajad-list"></ul>
 						</div>
 					</div>
 				</div>
