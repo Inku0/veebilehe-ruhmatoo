@@ -33,6 +33,10 @@ body {
 	color: maroon;
 }
 
+.nav-link:hover {
+	color: #995544;
+}
+
 .üldine {
 	padding-left: 1rem;
 	padding-right: 1rem;
