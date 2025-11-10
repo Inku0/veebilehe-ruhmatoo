@@ -135,12 +135,17 @@ const query = `
   }
 `;
 
+const delta =
+  "Tartu Ülikooli Delta õppehoone,  Tartu linn,  Tartu linn, Tartu maakond::58.38507,26.725327";
+const physicum =
+  "Tartu Ülikooli Physicum,  Tartu linn,  Tartu linn, Tartu maakond::58.36618,26.690229";
+
+const algus = document.getElementById("pealkiri").getAttribute("algus");
+
 // peab olema just selle nimega, muidu graphql ei aktsepteeri
 const variables = {
-  fromPlace:
-    "Tartu Ülikooli Delta õppehoone,  Tartu linn,  Tartu linn, Tartu maakond::58.38507,26.725327",
-  toPlace:
-    "Tartu Ülikooli Physicum,  Tartu linn,  Tartu linn, Tartu maakond::58.36618,26.690229",
+  fromPlace: algus == "delta" ? delta : physicum,
+  toPlace: algus == "delta" ? physicum : delta,
   numItineraries: 5, // see määrab ära, mitu bussiaega tuleb
   modes: [{ mode: "BUS" }, { mode: "WALK" }],
   date: new Date().toISOString().split("T")[0], // "2025-10-22",

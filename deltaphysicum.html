@@ -15,7 +15,7 @@
 		<link rel="stylesheet" href="styles.css" />
 
 		<!-- siin peab olema eraldiseisev sulgev tag, muidu HTML ei saa aru, kus lõpp on -->
-		<script src="script.js"></script>
+		<script defer src="script.js"></script>
 		<link rel="icon" href="favicon.ico" type="image/x-icon" />
 	</head>
 	<body>
@@ -26,8 +26,12 @@
 				</div>
 				<ul class="nav-lingid">
 					<li><a class="nav-link" href="index.html">Kodu</a></li>
-					<li><a class="nav-link" href="bussiajad.html">Bussiajad</a></li>
-					<li><a class="nav-link" href="#">Mingi kolmas asi</a></li>
+					<li>
+						<a class="nav-link" href="deltaphysicum.html">Delta → Physicum</a>
+					</li>
+					<li>
+						<a class="nav-link" href="physicumdelta.html">Physicum → Delta</a>
+					</li>
 				</ul>
 			</nav>
 		</header>
@@ -35,7 +39,7 @@
 		<main class="üldine">
 			<section class="bussiajad">
 				<div class="bussiajad-sisu">
-					<h2>Bussiajad:</h2>
+					<h2 id="pealkiri" algus="delta">Delta → Physicum bussiajad:</h2>
 					<hr />
 					<div class="bussiajad-saar">
 						<div>
