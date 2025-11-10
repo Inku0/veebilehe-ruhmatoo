@@ -11,8 +11,11 @@
     renderdamismootorit (edge) -->
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-		<title>Rühm VIIES</title>
+		<title>Bussiajad</title>
 		<link rel="stylesheet" href="styles.css" />
+
+		<!-- siin peab olema eraldiseisev sulgev tag, muidu HTML ei saa aru, kus lõpp on -->
+		<script defer src="script.js"></script>
 		<link rel="icon" href="favicon.ico" type="image/x-icon" />
 	</head>
 	<body>
@@ -34,30 +37,22 @@
 		</header>
 
 		<main class="üldine">
-			<section class="sissejuhatus">
-				<div class="sissejuhatus-sisu">
-					<h2>
-						Rühm <span style="color: slateblue">VIIES</span> esitab:
-						<span style="color: rebeccapurple">Bussiajad</span>
-					</h2>
+			<section class="bussiajad">
+				<div class="bussiajad-sisu">
+					<h2 id="pealkiri">Delta → Physicum bussiajad:</h2>
 					<hr />
-					<p>
-						See siis saab näitama Delta-Physicumi vahelisi bussiaegu, et
-						paremini jõuda AAR loengutesse. Protsess näeb välja selline:
-					</p>
-					<ol class="loetelu">
-						<li class="loetelu-element">
-							kasutame POST-request'i, et peatus.ee API-lt andmeid saada;
-						</li>
-						<li class="loetelu-element">
-							töötleme saadud andmed JavaScript'iga, sealhulgas eemaldame meie
-							jaoks ebavajaliku;
-						</li>
-						<li class="loetelu-element">
-							esitame kenal kujul andmed kasutajale, et ta saaks otsustada, kas
-							ja kuidas bussiga jõuda.
-						</li>
-					</ol>
+					<div class="bussiajad-saar">
+						<div>
+							<img src="buss.jpg" alt="Pilt Tartu bussist" width="500" />
+							<p style="font-size: 10px">
+								Pilt võetud lehelt https://www.tartu.ee/et/tartu-bussipidu
+							</p>
+						</div>
+						<hr />
+						<div style="flex: 1">
+							<ul id="bussiajad-list"></ul>
+						</div>
+					</div>
 				</div>
 			</section>
 		</main>

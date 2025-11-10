@@ -13,6 +13,9 @@
 
 		<title>Bussiajad</title>
 		<link rel="stylesheet" href="styles.css" />
+
+		<!-- siin peab olema eraldiseisev sulgev tag, muidu HTML ei saa aru, kus lõpp on -->
+		<script defer src="script.js"></script>
 		<link rel="icon" href="favicon.ico" type="image/x-icon" />
 	</head>
 	<body>
@@ -23,8 +26,12 @@
 				</div>
 				<ul class="nav-lingid">
 					<li><a class="nav-link" href="index.html">Kodu</a></li>
-					<li><a class="nav-link" href="bussiajad.html">Bussiajad</a></li>
-					<li><a class="nav-link" href="#">Mingi kolmas asi</a></li>
+					<li>
+						<a class="nav-link" href="deltaphysicum.html">Delta → Physicum</a>
+					</li>
+					<li>
+						<a class="nav-link" href="physicumdelta.html">Physicum → Delta</a>
+					</li>
 				</ul>
 			</nav>
 		</header>
@@ -32,7 +39,7 @@
 		<main class="üldine">
 			<section class="bussiajad">
 				<div class="bussiajad-sisu">
-					<h2>Bussiajad:</h2>
+					<h2 id="pealkiri">Physicum → Delta bussiajad:</h2>
 					<hr />
 					<div class="bussiajad-saar">
 						<div>
@@ -41,11 +48,9 @@
 								Pilt võetud lehelt https://www.tartu.ee/et/tartu-bussipidu
 							</p>
 						</div>
-						<p>Siia tuleb API-lt andmed kenas formaadis.</p>
 						<hr />
 						<div style="flex: 1">
-							<p>Näidis API requestist:</p>
-							<a href="request">Siin</a>
+							<ul id="bussiajad-list"></ul>
 						</div>
 					</div>
 				</div>
