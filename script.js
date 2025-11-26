@@ -206,6 +206,8 @@ document.addEventListener("DOMContentLoaded", () => {
     method: "POST",
     headers: { "Content-Type": "application/json" }, // tahame JSON formaadis andmeid
     body: JSON.stringify({ query, variables }), // API tahab ka JSON, seega teeme JSON-iks
+    // .stringify() võtab kuni kaks väärtust: algne väärtus (siin kohal muutuja `query`) ning valikuline replacer (siin kohal muutuja `variables`)
+    // replacer asendab algses väärtuses need väljad, mis on variables-is antud
   })
     .then((vastus) => vastus.json()) // .json() meetod loeb JSON-i JavaScript objektiks
     // (kasutab taustal ka lubadusi selleks (mis lahenduvad, kui edukalt on loetud))
