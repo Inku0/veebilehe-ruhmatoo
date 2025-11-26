@@ -19,7 +19,7 @@ const looBussiList = (andmed) => {
   konteiner.innerHTML = "";
 
   const h3 = document.createElement("h3");
-  h3.textContent = `Päringuaeg: ${new Date().toLocaleString("et-EE")}`;
+  h3.textContent = `Päringu aeg: ${new Date().toLocaleString("et-EE")}`;
   konteiner.appendChild(h3);
 
   if (!teekonnad.length) {
