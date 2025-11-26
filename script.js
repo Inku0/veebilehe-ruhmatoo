@@ -293,7 +293,7 @@ const bussiajadKompositsioon = async () => {
   }
 
   // paneme laadimise spinneri tööle
-  spinner.style.display = "block";
+  spinner.style.display = "flex";
 
   // katkestame päringu, mis võis veel lennus olla
   httpKontroll?.abort(); // küsimärk tähendab, et ta ei lenda katastroofiliselt õhku, kui httpKontroll peaks olema null (ei ole ühtegi lennus päringut)

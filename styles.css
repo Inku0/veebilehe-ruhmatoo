@@ -79,9 +79,6 @@ footer {
 	font-size: 0.95rem;
 	color: #333;
 }
-#laadimine-spinner[hidden] {
-	display: none;
-}
 #laadimine-spinner .ring {
 	width: 42px;
 	height: 42px;
