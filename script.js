@@ -93,6 +93,23 @@ const algus =
     ? "physicum"
     : "delta";
 
+
+// funktsioon minuti möödumisel väljumiseni jäänud aja värskendamiseks, töötab tsüklis
+function minVaheFn(algusAeg, index) {
+  const aegVaheMin = Math.floor((algusAeg - (new Date()))/(60000));
+  // kui aega järel, näidata minuteid, kui pole möödunud 3 minutit, näidata "saabumas", hiljem näidata "väljunud"
+  if (aegVaheMin > 0) {
+    var aegVaheSisu = " (saabub " + aegVaheMin + " min)";
+  } else if (aegVaheMin > (-3)) {
+    var aegVaheSisu = " (saabumas)";
+  } else {
+    var aegVaheSisu = " (väljunud)";
+  };
+  // uuendada lehel kuvatavat aega
+  document.querySelector(`.minVahe_${index}_${algusAeg}`).innerHTML = aegVaheSisu
+};
+
+
 // peab olema just selle nimega, muidu graphql ei aktsepteeri
 const variables = {
   fromPlace: algus === "delta" ? delta : physicum,
@@ -194,7 +211,26 @@ const looBussiList = (andmed) => {
         const sisu = document.createElement("p"); // loome uue <p> elemendi (bussiaja andmed)
 
         sisu.innerHTML = `Buss nr <strong>${bussNr}</strong>: väljub peatusest <em>${algPeatus}</em> kell <strong>${algAeg}</strong>, saabub peatusesse <em>${loppPeatus}</em> kell <strong>${loppAeg}</strong>`;
-        loeteluLiikmeKonteiner.appendChild(sisu); // lisame sellele konteinerile nüüd päris bussiaja ka
+        // lisada minutite kaupa kontroll ainult esimese kahe bussiaja kohta
+        // index < n, kus n määrab, mitu esimest bussiaega min järel arvutusega
+        if (index < 2) {
+          // esitada väljumise ja praeguse aja vahe minutites
+          var aegVaheMin = Math.floor((jalg.startTime - (new Date()))/(60000));
+          // kui aega järel, näidata minuteid, kui pole möödunud 3 minutit, näidata "saabumas", hiljem näidata "väljunud"
+          if (aegVaheMin > 0) {
+            var aegVaheSisu = " (saabub " + aegVaheMin + " min)";
+          } else if (aegVaheMin > (-3)) {
+            var aegVaheSisu = " (saabumas)";
+          } else {
+            var aegVaheSisu = " (väljunud)";
+          };
+          sisu.innerHTML += `<span class="minVahe_${index}_${jalg.startTime}"> ${aegVaheSisu}</span>`;
+          // kontrollida ja värskendada aega väljumiseni kord minutis
+          var minInter = setInterval(function() {
+            minVaheFn(jalg.startTime, index)
+          }, 60000);
+        };
+        loeteluLiikmeKonteiner.appendChild(sisu); // lisame sellele konteinerile nüüd päris bussiaja ka'
       });
 
     loeteluLiige.appendChild(loeteluLiikmeKonteiner); // paneme kogu selle konteiner elemendi, milles on pealkiri ja andmed, <li> elemendi sisse
