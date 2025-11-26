@@ -171,6 +171,12 @@ const looBussiList = (andmed) => {
 
     loeteluLiikmeKonteiner.appendChild(header); // lisame sellele konteinerile pealkirja
 
+    if (!teekond.legs) {
+      const sisu = document.createElement("p");
+      sisu.textContent = "Viga! bussiajal puudub info.";
+      loeteluLiikmeKonteiner.appendChild(sisu);
+    }
+
     teekond.legs // iga teekonna osa kohta
       .filter((jalg) => jalg.transitLeg && jalg.mode === "BUS") // meid huvitavad ainult bussitsi osad, mitte jalgsi osad
       .forEach((jalg) => {
