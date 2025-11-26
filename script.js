@@ -97,9 +97,15 @@ const algus =
 // funktsioon minuti möödumisel väljumiseni jäänud aja värskendamiseks, töötab tsüklis
 function minVaheFn(algusAeg, index) {
   const aegVaheMin = Math.floor((algusAeg - (new Date()))/(60000));
-  // kui aega järel, näidata minuteid, kui pole möödunud 3 minutit, näidata "saabumas", hiljem näidata "väljunud"
+  // kui aega järel, näidata minuteid (vajadusel tundidega), kui pole möödunud 3 minutit, näidata "saabumas", hiljem näidata "väljunud"
   if (aegVaheMin > 0) {
-    var aegVaheSisu = " (saabub " + aegVaheMin + " min)";
+    if (aegVaheMin < 60) {
+      var aegVaheSisu = " (saabub " + aegVaheMin + " min)";
+    } else if (aegVaheMin < 120) {
+      var aegVaheSisu = " (saabub " + Math.floor(aegVaheMin/60) + " tund " + (aegVaheMin % 60) + " min)"
+    } else {
+      var aegVaheSisu = " (saabub " + Math.floor(aegVaheMin/60) + " tundi " + (aegVaheMin % 60) + " min)"
+    }
   } else if (aegVaheMin > (-3)) {
     var aegVaheSisu = " (saabumas)";
   } else {
@@ -216,9 +222,15 @@ const looBussiList = (andmed) => {
         if (index < 2) {
           // esitada väljumise ja praeguse aja vahe minutites
           var aegVaheMin = Math.floor((jalg.startTime - (new Date()))/(60000));
-          // kui aega järel, näidata minuteid, kui pole möödunud 3 minutit, näidata "saabumas", hiljem näidata "väljunud"
+          // kui aega järel, näidata minuteid (vajadusel tundidega), kui pole möödunud 3 minutit, näidata "saabumas", hiljem näidata "väljunud"
           if (aegVaheMin > 0) {
-            var aegVaheSisu = " (saabub " + aegVaheMin + " min)";
+            if (aegVaheMin < 60) {
+              var aegVaheSisu = " (saabub " + aegVaheMin + " min)";
+            } else if (aegVaheMin < 120) {
+              var aegVaheSisu = " (saabub " + Math.floor(aegVaheMin/60) + " tund " + (aegVaheMin % 60) + " min)"
+            } else {
+              var aegVaheSisu = " (saabub " + Math.floor(aegVaheMin/60) + " tundi " + (aegVaheMin % 60) + " min)"
+            }
           } else if (aegVaheMin > (-3)) {
             var aegVaheSisu = " (saabumas)";
           } else {
@@ -227,7 +239,7 @@ const looBussiList = (andmed) => {
           sisu.innerHTML += `<span class="minVahe_${index}_${jalg.startTime}"> ${aegVaheSisu}</span>`;
           // kontrollida ja värskendada aega väljumiseni kord minutis
           var minInter = setInterval(function() {
-            minVaheFn(jalg.startTime, index)
+            minVaheFn(jalg.startTime, index);
           }, 60000);
         };
         loeteluLiikmeKonteiner.appendChild(sisu); // lisame sellele konteinerile nüüd päris bussiaja ka'
