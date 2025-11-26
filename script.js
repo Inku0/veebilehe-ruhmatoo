@@ -216,6 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then((andmed) => looBussiList(andmed)) // andmed käes -> kutsume välja looBussiList funktsiooni nende andmetega
 
     .catch((err) => {
+      // püüab kinni veateate
       const konteiner = document.getElementById("bussiajad-list");
       if (konteiner) {
         const p = document.createElement("p"); // loome uue <p> elemendi, kuhu veateade kirjutada
