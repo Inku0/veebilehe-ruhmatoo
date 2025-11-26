@@ -12,7 +12,7 @@ body {
 }
 
 .päis {
-	background-color: antiquewhite;
+	background-color: rgb(250, 244, 227);
 	padding-left: 1rem;
 	padding-right: 1rem;
 }
@@ -26,11 +26,13 @@ body {
 .nav-lingid {
 	display: flex;
 	gap: 1.5rem;
+	padding-right: 1rem;
 }
 
 .nav-link {
-	text-decoration: underline double;
-	color: maroon;
+	text-decoration: underline;
+	color: rgb(125, 18, 18);
+	font-size: 1.1rem;
 }
 
 .üldine {
@@ -49,13 +51,23 @@ footer {
 
 .bussiajad-saar {
 	display: flex;
-	gap: 1rem;
+	gap: 0.5rem;
+	padding-right: 1rem;
 }
-
+.bussiajad-sisu {
+	flex: 1;
+	font-size: 0.9rem;
+	font-family: Arial, sans-serif;
+}
 .loetelu {
 	list-style-type: decimal-leading-zero;
 }
 
 .loetelu-element {
 	padding: 0.25rem;
+}
+
+.logo-img {
+    width: 10rem;
+    height: 6.5rem;
 }
