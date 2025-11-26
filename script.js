@@ -1,4 +1,7 @@
 // autor: Ingvar Saarend, API andmed ja struktuur võetud peatus.ee lehelt
+
+// see funktsioon võtab argumendina aja (selle skripti puhul on aeg UNIX epoch formaadis ehk x millisekundit 1970. aasta 1. jaanuarist vmt)
+// ning teeb sellest uue Date objekti, mille ta viib sobivale eestilikule kujule
 const kenastaAeg = (aeg) => {
   try {
     return new Intl.DateTimeFormat("et-EE", {
@@ -6,40 +9,59 @@ const kenastaAeg = (aeg) => {
       minute: "2-digit",
     }).format(new Date(aeg));
   } catch {
-    return "";
+    return "Viga! API tagastas aja vales formaadis.";
   }
 };
 
+// see funktsioon kasutab olemasolevaid <div> ja <ul> elemente, et lisada <li> elemente (bussiaegu)
 const looBussiList = (andmed) => {
-  const konteiner = document.getElementById("bussiajad-list");
-  if (!konteiner) return andmed;
-  const teekonnad = andmed.data.viewer.plan.itineraries;
+  const konteiner = document.getElementById("bussiajad-konteiner"); // see on see <div> element, mille ID on bussiajad-konteiner
 
-  // igaks juhuks teeme listi tühjaks
-  konteiner.innerHTML = "";
-
-  const h3 = document.createElement("h3");
-  h3.textContent = `Päringu aeg: ${new Date().toLocaleString("et-EE")}`;
-  konteiner.appendChild(h3);
-
-  if (!teekonnad.length) {
-    const li = document.createElement("li");
-    li.textContent = "Ei leidnud mitte ühtegi bussiaega!";
-    konteiner.appendChild(li);
+  if (!konteiner) {
+    console.error("konteinerit ID-ga #bussiajad-konteiner ei leitud!");
     return andmed;
+  } // kui seda <div> elementi pole, siis return'i kohe ehk lõpeta oma töö kohe
+
+  const h3 = document.createElement("h3"); // loome uue H3 elemendi
+  h3.textContent = `Päringu aeg: ${new Date().toLocaleString("et-EE")}`; // mille sisuks paneme tänase kuupäeva ja kellaaja eestilikus formaadis (DD.MM.YY, HH:mm:ss)
+  konteiner.appendChild(h3); // lisame <div> elemendile
+
+  // API-lt tagastatud andmed on muidu päris komplekssel kujul
+  const teekonnad = andmed.data.viewer.plan.itineraries; // siin asub bussiaegade massiiv
+
+  // kontrollime, kas me üldse saime bussiaegu
+  if (!teekonnad.length) {
+    // 0 on falsy väärtus
+    const h3 = document.createElement("h3"); // loome uue <h3> elemendi
+    h3.textContent = "Ei leidnud mitte ühtegi bussiaega!"; // ja paneme sisuks veateate
+    konteiner.appendChild(h3); // lisame <div> elemendile
+    return andmed; // ning lõpetame töö
   }
 
+  const loetelu = document.getElementById("bussiajad-loetelu"); // see on see <ul> element, mille ID on bussiajad-loetelu
+  loetelu.innerHTML = ""; // igaks juhuks teeme loetelu kõigepealt tühjaks
+
+  // nüüd võime kindlad olla, et saime bussiaegu
   teekonnad.forEach((teekond, index) => {
-    // iga bussiaeg saab järjest numbri
-    const header = document.createElement("p");
+    // iga bussiajaga teeme järgnevat
+    // index argument on forEach poolt antud ning see annab igale bussiajale järjest numbri
+
+    const loeteluLiige = document.createElement("li"); // loome uue <li> elemendi, mis saab hoidma konteinerit, milles on pealkiri ja bussiaeg
+    const loeteluLiikmeKonteiner = document.createElement("div"); // loome selle konteineri ehk uue <div> elemendi
+    const header = document.createElement("p"); // loome selle pealkirja ehk uue <p> elemendi
+
     header.innerHTML = `<strong>Bussiaeg ${index + 1}</strong> (hakka liikuma kl ${kenastaAeg(teekond.startTime)} → jõuad ${kenastaAeg(teekond.endTime)})`;
-    konteiner.appendChild(header);
+    // pealkiri on meile sobival kujul bussiaja andmetest koostatud
 
-    const listIse = document.createElement("ul");
+    loeteluLiikmeKonteiner.appendChild(header); // lisame sellele konteinerile pealkirja
 
-    teekond.legs
-      .filter((jalg) => jalg.transitLeg && jalg.mode === "BUS") // ainult bussiajad, mitte jalgsi osad
+    teekond.legs // iga teekonna osa kohta
+      .filter((jalg) => jalg.transitLeg && jalg.mode === "BUS") // meid huvitavad ainult bussitsi osad, mitte jalgsi osad
       .forEach((jalg) => {
+        // iga bussiajaga tee järgnevat
+
+        // ?? tähendab nullish coalescing operator vmt, põhimõtteliselt ta kontrollib, kas vasakpoolne väärtus on tõene või väär, ning kui on väär, siis tagastab parempoolse väärtuse
+        // põhimõtteliselt vaikeväärtus
         const bussNr = jalg.route.shortName ?? "puudub nr";
         const algPeatus = jalg.from.name ?? "puudub alguse peatus";
         const algAeg = kenastaAeg(jalg.startTime);
@@ -47,17 +69,21 @@ const looBussiList = (andmed) => {
         const loppPeatus = jalg.to.name ?? "puudub lõpu peatus";
         const loppAeg = kenastaAeg(jalg.endTime);
 
-        const li = document.createElement("li");
-        li.innerHTML = `Buss nr <strong>${bussNr}</strong>: väljub peatusest <em>${algPeatus}</em> kell <strong>${algAeg}</strong>, saabub peatusesse <em>${loppPeatus}</em> kell <strong>${loppAeg}</strong>`;
-        listIse.appendChild(li);
+        const sisu = document.createElement("p"); // loome uue <p> elemendi (bussiaja andmed)
+
+        sisu.innerHTML = `Buss nr <strong>${bussNr}</strong>: väljub peatusest <em>${algPeatus}</em> kell <strong>${algAeg}</strong>, saabub peatusesse <em>${loppPeatus}</em> kell <strong>${loppAeg}</strong>`;
+        loeteluLiikmeKonteiner.appendChild(sisu); // lisame sellele konteinerile nüüd päris bussiaja ka
       });
 
-    konteiner.appendChild(listIse);
+    loeteluLiige.appendChild(loeteluLiikmeKonteiner); // paneme kogu selle konteiner elemendi, milles on pealkiri ja andmed, <li> elemendi sisse
+    loetelu.appendChild(loeteluLiige); // lisame nüüd selle <li> elemendi <ul>-i (loeteluliige läheb loetellu)
   });
+  konteiner.appendChild(loetelu); // lisame terve selle loetelu lõpuks vanem <div> elemendile
 
-  return andmed;
+  return andmed; // lõpetame töö
 };
 
+// API URL
 const url = "https://api.peatus.ee/routing/v1/routers/estonia/index/graphql";
 
 // peab olema just selle nimega, muidu graphql ei aktsepteeri
@@ -135,12 +161,15 @@ const query = `
   }
 `;
 
+// GraphQL-ile sobiv formaat
 const delta =
   "Tartu Ülikooli Delta õppehoone,  Tartu linn,  Tartu linn, Tartu maakond::58.38507,26.725327";
 const physicum =
   "Tartu Ülikooli Physicum,  Tartu linn,  Tartu linn, Tartu maakond::58.36618,26.690229";
 
+// et määrata ära, kumba pidi peaks teekonda küsima, vaatame elementi, mille ID on pealkiri
 const algus =
+  // kui pealkiri on "Physicum -> Delta bussiajad:", siis algus on physicum, muul juhul on delta
   document.getElementById("pealkiri").getHTML() ===
   "Physicum → Delta bussiajad:"
     ? "physicum"
@@ -152,8 +181,8 @@ const variables = {
   toPlace: algus === "delta" ? physicum : delta,
   numItineraries: 5, // see määrab ära, mitu bussiaega tuleb
   modes: [{ mode: "BUS" }, { mode: "WALK" }],
-  date: new Date().toISOString().split("T")[0], // "2025-10-22",
-  time: new Date().toLocaleString("et"), // "14:48:23"
+  date: new Date().toISOString().split("T")[0], // "2025-10-22", määrab kuupäeva (saaks lasta kasutajal muuta)
+  time: new Date().toLocaleString("et"), // "14:48:23", määrab kellaaja (saaks lasta kasutajal muuta)
   walkReluctance: 1.8,
   maxWalkDistance: 10000,
   walkBoardCost: 120,
@@ -161,7 +190,7 @@ const variables = {
   walkSpeed: 1.2,
   wheelchair: false,
   ticketTypes: null,
-  arriveBy: false,
+  arriveBy: false, // peaks määrama max kellaaja, enne mida peab jõudma (saaks lasta kasutajal muuta)
   transferPenalty: 0,
   bikeSpeed: 5.55,
   optimize: "GREENWAYS",
@@ -169,21 +198,30 @@ const variables = {
   modeWeight: null,
 };
 
+// see jookseb kohe, kui skript sisse laetakse
+// lisab dokumendile (HTML lehele) kuulaja, mis aktiveerub, kui veebileht on ära laetud (DOMContentLoaded)
 document.addEventListener("DOMContentLoaded", () => {
+  // teeme POST päringu peatus.ee GraphQL API-le
   fetch(url, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query, variables }),
+    headers: { "Content-Type": "application/json" }, // tahame JSON formaadis andmeid
+    body: JSON.stringify({ query, variables }), // API tahab ka JSON, seega teeme JSON-iks
   })
-    .then((vastus) => vastus.json())
-    .then((andmed) => looBussiList(andmed))
+    .then((vastus) => vastus.json()) // .json() meetod loeb JSON-i JavaScript objektiks
+    // (kasutab taustal ka lubadusi selleks (mis lahenduvad, kui edukalt on loetud))
+
+    .then((andmed) => looBussiList(andmed)) // andmed käes -> kutsume välja looBussiList funktsiooni nende andmetega
+
     .catch((err) => {
       const konteiner = document.getElementById("bussiajad-list");
       if (konteiner) {
-        const li = document.createElement("li");
-        li.textContent = `Viga andmete laadimisel: ${err?.message ?? err}`;
-        konteiner.appendChild(li);
+        const p = document.createElement("p"); // loome uue <p> elemendi, kuhu veateade kirjutada
+        p.textContent = `Viga andmete laadimisel: ${err?.message ?? err}`;
+        konteiner.appendChild(p);
       }
-      console.error(err);
+      console.error(
+        "Viga! API päring nurjus ning konteiner ka puudub. Kõik on pekkis.",
+        err,
+      );
     });
 });
