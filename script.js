@@ -182,7 +182,7 @@ const looBussiList = (andmed) => {
       .forEach((jalg) => {
         // iga bussiajaga tee järgnevat
 
-        // ?? tähendab nullish coalescing operator vmt, põhimõtteliselt ta kontrollib, kas vasakpoolne väärtus on tõene või väär, ning kui on väär, siis tagastab parempoolse väärtuse
+        // ?? tähendab nullish coalescing operator vmt, põhimõtteliselt ta kontrollib, kas vasakpoolne väärtus on null v undefined, ning kui on, siis tagastab parempoolse väärtuse
         // põhimõtteliselt vaikeväärtus
         const bussNr = jalg.route.shortName ?? "puudub nr";
         const algPeatus = jalg.from.name ?? "puudub alguse peatus";
