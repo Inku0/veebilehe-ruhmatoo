@@ -76,6 +76,7 @@ const looBussiList = (andmed) => {
       });
 
     loeteluLiige.appendChild(loeteluLiikmeKonteiner); // paneme kogu selle konteiner elemendi, milles on pealkiri ja andmed, <li> elemendi sisse
+    loeteluLiige.appendChild(document.createElement("hr")); // lisame <li> elemendi sisse ka horisontaalse joone, mis eraldab bussiaegu visuaalselt
     loetelu.appendChild(loeteluLiige); // lisame nüüd selle <li> elemendi <ul>-i (loeteluliige läheb loetellu)
   });
   konteiner.appendChild(loetelu); // lisame terve selle loetelu lõpuks vanem <div> elemendile
