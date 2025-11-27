@@ -68,6 +68,27 @@ footer {
 }
 
 .logo-img {
-    width: 10rem;
-    height: 6.5rem;
+	width: 10rem;
+	height: 6.5rem;
+}
+
+#laadimine-spinner {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	font-size: 0.95rem;
+	color: #333;
+}
+#laadimine-spinner .ring {
+	width: 42px;
+	height: 42px;
+	border: 6px solid #d4d4d4;
+	border-top-color: rgb(125, 18, 18);
+	border-radius: 50%;
+	animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
 }
