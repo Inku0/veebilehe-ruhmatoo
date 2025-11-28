@@ -100,16 +100,16 @@ function minVaheFn(algusAeg, index) {
   // kui aega järel, näidata minuteid (vajadusel tundidega), kui pole möödunud 3 minutit, näidata "saabumas", hiljem näidata "väljunud"
   if (aegVaheMin > 0) {
     if (aegVaheMin < 60) {
-      var aegVaheSisu = " (saabub " + aegVaheMin + " min)";
+      var aegVaheSisu = " (" + aegVaheMin + " min pärast)";
     } else if (aegVaheMin < 120) {
-      var aegVaheSisu = " (saabub " + Math.floor(aegVaheMin/60) + " tund " + (aegVaheMin % 60) + " min)"
+      var aegVaheSisu = " (" + Math.floor(aegVaheMin/60) + " tund " + (aegVaheMin % 60) + " min pärast)"
     } else {
-      var aegVaheSisu = " (saabub " + Math.floor(aegVaheMin/60) + " tundi " + (aegVaheMin % 60) + " min)"
+      var aegVaheSisu = " (" + Math.floor(aegVaheMin/60) + " tundi " + (aegVaheMin % 60) + " min pärast)"
     }
   } else if (aegVaheMin > (-3)) {
-    var aegVaheSisu = " (saabumas)";
+    var aegVaheSisu = " <span class='saabumasSinine'>(saabumas)</span>";
   } else {
-    var aegVaheSisu = " (väljunud)";
+    var aegVaheSisu = " <span class='väljunudPunane'>(väljunud)</span>";
   };
   // uuendada lehel kuvatavat aega
   document.querySelector(`.minVahe_${index}_${algusAeg}`).innerHTML = aegVaheSisu
@@ -215,8 +215,7 @@ const looBussiList = (andmed) => {
         const loppAeg = kenastaAeg(jalg.endTime);
 
         const sisu = document.createElement("p"); // loome uue <p> elemendi (bussiaja andmed)
-
-        sisu.innerHTML = `Buss nr <strong>${bussNr}</strong>: väljub peatusest <em>${algPeatus}</em> kell <strong>${algAeg}</strong>, saabub peatusesse <em>${loppPeatus}</em> kell <strong>${loppAeg}</strong>`;
+        
         // lisada minutite kaupa kontroll ainult esimese kahe bussiaja kohta
         // index < n, kus n määrab, mitu esimest bussiaega min järel arvutusega
         if (index < 2) {
@@ -225,22 +224,25 @@ const looBussiList = (andmed) => {
           // kui aega järel, näidata minuteid (vajadusel tundidega), kui pole möödunud 3 minutit, näidata "saabumas", hiljem näidata "väljunud"
           if (aegVaheMin > 0) {
             if (aegVaheMin < 60) {
-              var aegVaheSisu = " (saabub " + aegVaheMin + " min)";
+              var aegVaheSisu = " (" + aegVaheMin + " min pärast)";
             } else if (aegVaheMin < 120) {
-              var aegVaheSisu = " (saabub " + Math.floor(aegVaheMin/60) + " tund " + (aegVaheMin % 60) + " min)"
+              var aegVaheSisu = " (" + Math.floor(aegVaheMin/60) + " tund " + (aegVaheMin % 60) + " min pärast)"
             } else {
-              var aegVaheSisu = " (saabub " + Math.floor(aegVaheMin/60) + " tundi " + (aegVaheMin % 60) + " min)"
+              var aegVaheSisu = " (" + Math.floor(aegVaheMin/60) + " tundi " + (aegVaheMin % 60) + " min pärast)"
             }
           } else if (aegVaheMin > (-3)) {
-            var aegVaheSisu = " (saabumas)";
+            var aegVaheSisu = " <span class='saabumasSinine'>(saabumas)</span>";
           } else {
-            var aegVaheSisu = " (väljunud)";
+            var aegVaheSisu = " <span class='väljunudPunane'>(väljunud)</span>";
           };
-          sisu.innerHTML += `<span class="minVahe_${index}_${jalg.startTime}"> ${aegVaheSisu}</span>`;
+          aegVaheHTML = `<span class="minVahe_${index}_${jalg.startTime}"> ${aegVaheSisu}</span>`;
+          sisu.innerHTML = `Buss nr <strong>${bussNr}</strong>: väljub peatusest <em>${algPeatus}</em> kell <strong>${algAeg}</strong>${aegVaheHTML}, saabub peatusesse <em>${loppPeatus}</em> kell <strong>${loppAeg}</strong>`;
           // kontrollida ja värskendada aega väljumiseni kord minutis
           var minInter = setInterval(function() {
             minVaheFn(jalg.startTime, index);
           }, 60000);
+        } else {
+          sisu.innerHTML = `Buss nr <strong>${bussNr}</strong>: väljub peatusest <em>${algPeatus}</em> kell <strong>${algAeg}</strong>, saabub peatusesse <em>${loppPeatus}</em> kell <strong>${loppAeg}</strong>`;
         };
         loeteluLiikmeKonteiner.appendChild(sisu); // lisame sellele konteinerile nüüd päris bussiaja ka'
       });
