@@ -101,10 +101,8 @@ function minVaheFn(algusAeg, index) {
   if (aegVaheMin > 0) {
     if (aegVaheMin < 60) {
       var aegVaheSisu = " (" + aegVaheMin + " min pärast)";
-    } else if (aegVaheMin < 120) {
-      var aegVaheSisu = " (" + Math.floor(aegVaheMin/60) + " tund " + (aegVaheMin % 60) + " min pärast)"
     } else {
-      var aegVaheSisu = " (" + Math.floor(aegVaheMin/60) + " tundi " + (aegVaheMin % 60) + " min pärast)"
+      var aegVaheSisu = " (" + Math.floor(aegVaheMin/60) + " tunni " + (aegVaheMin % 60) + " min pärast)"
     }
   } else if (aegVaheMin > (-3)) {
     var aegVaheSisu = " <span class='saabumasSinine'>(saabumas)</span>";
@@ -225,10 +223,8 @@ const looBussiList = (andmed) => {
           if (aegVaheMin > 0) {
             if (aegVaheMin < 60) {
               var aegVaheSisu = " (" + aegVaheMin + " min pärast)";
-            } else if (aegVaheMin < 120) {
-              var aegVaheSisu = " (" + Math.floor(aegVaheMin/60) + " tund " + (aegVaheMin % 60) + " min pärast)"
             } else {
-              var aegVaheSisu = " (" + Math.floor(aegVaheMin/60) + " tundi " + (aegVaheMin % 60) + " min pärast)"
+              var aegVaheSisu = " (" + Math.floor(aegVaheMin/60) + " tunni " + (aegVaheMin % 60) + " min pärast)"
             }
           } else if (aegVaheMin > (-3)) {
             var aegVaheSisu = " <span class='saabumasSinine'>(saabumas)</span>";
