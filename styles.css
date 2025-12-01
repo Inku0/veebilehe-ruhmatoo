@@ -113,6 +113,10 @@ footer {
 	color: rebeccapurple;
 }
 
+.bussiajad-pilt {
+	width: 30vw;
+}
+
 @media only screen and (min-width: 600px) {
 	.navigatsioon {
 		justify-content: space-between;
