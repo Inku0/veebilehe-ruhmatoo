@@ -35,6 +35,10 @@ body {
 	font-size: 1.1rem;
 }
 
+.nav-link:hover {
+	color: #995544;
+}
+
 .üldine {
 	padding-left: 1rem;
 	padding-right: 1rem;
@@ -99,4 +103,11 @@ footer {
 
 .väljunudPunane {
 	color: #990000
+    
+.viiesSinine {
+	color: slateblue;
+}
+
+.bussiajadLilla {
+	color: rebeccapurple;
 }
