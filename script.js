@@ -95,6 +95,7 @@ const algus =
 
 
 // funktsioon minuti möödumisel väljumiseni jäänud aja värskendamiseks, töötab tsüklis
+// funktsiooni autor: Oliver Albert Hallik
 function minVaheFn(algusAeg, index) {
   const aegVaheMin = Math.floor((algusAeg - (new Date()))/(60000));
   // kui aega järel, näidata minuteid (vajadusel tundidega), kui pole möödunud 3 minutit, näidata "saabumas", hiljem näidata "väljunud"
@@ -216,6 +217,7 @@ const looBussiList = (andmed) => {
         
         // lisada minutite kaupa kontroll ainult esimese kahe bussiaja kohta
         // index < n, kus n määrab, mitu esimest bussiaega min järel arvutusega
+        // autor: Oliver Albert Hallik
         if (index < 2) {
           // esitada väljumise ja praeguse aja vahe minutites
           var aegVaheMin = Math.floor((jalg.startTime - (new Date()))/(60000));
@@ -224,14 +226,14 @@ const looBussiList = (andmed) => {
             if (aegVaheMin < 60) {
               var aegVaheSisu = " (" + aegVaheMin + " min pärast)";
             } else {
-              var aegVaheSisu = " (" + Math.floor(aegVaheMin/60) + " tunni " + (aegVaheMin % 60) + " min pärast)"
-            }
+              var aegVaheSisu = " (" + Math.floor(aegVaheMin/60) + " tunni " + (aegVaheMin % 60) + " min pärast)";
+            };
           } else if (aegVaheMin > (-3)) {
             var aegVaheSisu = " <span class='saabumasSinine'>(saabumas)</span>";
           } else {
             var aegVaheSisu = " <span class='väljunudPunane'>(väljunud)</span>";
           };
-          aegVaheHTML = `<span class="minVahe_${index}_${jalg.startTime}"> ${aegVaheSisu}</span>`;
+          var aegVaheHTML = `<span class="minVahe_${index}_${jalg.startTime}"> ${aegVaheSisu}</span>`;
           sisu.innerHTML = `Buss nr <strong>${bussNr}</strong>: väljub peatusest <em>${algPeatus}</em> kell <strong>${algAeg}</strong>${aegVaheHTML}, saabub peatusesse <em>${loppPeatus}</em> kell <strong>${loppAeg}</strong>`;
           // kontrollida ja värskendada aega väljumiseni kord minutis
           var minInter = setInterval(function() {
