@@ -20,7 +20,7 @@ body {
 .navigatsioon {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	flex-direction: column;
 }
 
 .nav-lingid {
@@ -98,16 +98,40 @@ footer {
 }
 
 .saabumasSinine {
-	color: #000099
+	color: #000099;
 }
 
 .väljunudPunane {
-	color: #990000
-    
+	color: #990000;
+}
+
 .viiesSinine {
 	color: slateblue;
 }
 
 .bussiajadLilla {
 	color: rebeccapurple;
+}
+
+.bussiajad-pilt {
+	width: 30vw;
+}
+
+@media only screen and (min-width: 600px) {
+	.navigatsioon {
+		justify-content: space-between;
+		flex-direction: row;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.nav-lingid {
+		flex-direction: column;
+	}
+	.bussiajad-saar {
+		flex-direction: column;
+	}
+	.bussiajad-pilt {
+		width: 90vw;
+	}
 }
